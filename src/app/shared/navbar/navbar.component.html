@@ -1,0 +1,13 @@
+<header class="header"><nav class="container nav" aria-label="Navegación principal">
+  <a routerLink="/" class="brand" aria-label="BeTimeCo, inicio"><img src="/img/logo-betime-blanco-negativo.svg" alt="BeTimeCo"></a>
+  <button class="menu-toggle" (click)="abierto = !abierto" [attr.aria-expanded]="abierto" aria-controls="navegacion">Menú</button>
+  <div class="nav-links" id="navegacion" [class.abierto]="abierto">
+    <a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}" (click)="abierto = false">Colección</a>
+    <a routerLink="/carrito" routerLinkActive="activo" (click)="abierto = false">Carrito <span class="cart-count">{{ cart.cantidad }}</span></a>
+    <ng-container *ngIf="auth.usuario$ | async as usuario; else acceso">
+      <a routerLink="/mis-productos" routerLinkActive="activo" (click)="abierto = false">Mis productos</a>
+      <span class="user-name">{{ usuario.nombre }}</span><button class="nav-exit" (click)="salir()">Salir</button>
+    </ng-container>
+    <ng-template #acceso><a routerLink="/login" (click)="abierto = false">Ingresar</a><a class="nav-register" routerLink="/register" (click)="abierto = false">Crear cuenta</a></ng-template>
+  </div>
+</nav></header>
