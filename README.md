@@ -61,6 +61,8 @@ npm.cmd run build
 
 El resultado queda en `dist/betimeco-frontend/browser`. No contiene el backend: para usar la aplicación sigue siendo necesario ejecutar la API. Esta entrega no incluye despliegue público.
 
+Para mostrar una compilación ya preparada puedes usar `npm.cmd run preview` en lugar de `npm.cmd start`. Este servidor usa únicamente Node y facilita la demostración desde Google Drive. Si descargaste el repositorio, primero debes ejecutar `npm.cmd install` y `npm.cmd run build`, porque dist no se guarda en Git.
+
 ## Recursos y autoría
 
 Se reutilizaron las imágenes y logotipos del proyecto HTML y CSS de BeTimeCo de Alex. El desarrollo se realizó con asistencia de Codex; debe revisarse y explicarse respetando la exigencia de escritura manual del profesor.
