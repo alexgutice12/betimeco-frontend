@@ -44,7 +44,7 @@ El proyecto utiliza Angular 22 con formularios reactivos y la organización de c
 
 ## Qué puedes mostrar
 
-1. Colección leída de MongoDB, búsqueda por nombre y filtro por estilo.
+1. Portada original de HTML y CSS, con sus seis relojes destacados leídos de MongoDB y todas sus secciones.
 2. Clic en un reloj: el servicio consulta su detalle por ID y abre un diálogo.
 3. Registro con validaciones y login con JWT guardado en sessionStorage.
 4. Mis productos: crear, editar nombre, descripción, precio, stock, categoría e imagen, y eliminar con confirmación.

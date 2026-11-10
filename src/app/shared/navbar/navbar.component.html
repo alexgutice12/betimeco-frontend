@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" id="inicio">
   <nav class="container nav" aria-label="Navegación principal">
     <a routerLink="/" class="brand" aria-label="BeTimeCo, inicio"
       ><img src="/img/logo-betime-blanco-negativo.svg" alt="BeTimeCo"
@@ -17,7 +17,17 @@
         routerLinkActive="activo"
         [routerLinkActiveOptions]="{ exact: true }"
         (click)="abierto = false"
-        >Colección</a
+        >Inicio</a
+      >
+      <a routerLink="/" fragment="coleccion" (click)="abierto = false"
+        >Relojes</a
+      >
+      <a routerLink="/" fragment="nosotros" (click)="abierto = false"
+        >Nosotros</a
+      >
+      <a routerLink="/" fragment="estilos" (click)="abierto = false">Estilos</a>
+      <a routerLink="/" fragment="contacto" (click)="abierto = false"
+        >Contacto</a
       >
       <a
         routerLink="/carrito"

@@ -2,11 +2,22 @@
 <app-navbar />
 <main id="contenido"><router-outlet /></main>
 <footer class="footer">
-  <div class="container footer-inner">
-    <div>
-      <strong>BeTimeCo</strong>
-      <p>Relojes para cada estilo y cada momento.</p>
+  <div class="container footer-content">
+    <div class="footer-brand">
+      <img src="/img/logo-betime-blanco-negativo.svg" alt="Logo BeTimeCo" />
+      <p>Tu tiempo, tu estilo.</p>
     </div>
-    <p>Proyecto de Alexander Gutiérrez · Desarrollo web MEAN Stack</p>
+
+    <div class="footer-links">
+      <a routerLink="/" fragment="inicio">Inicio</a>
+      <a routerLink="/" fragment="coleccion">Relojes</a>
+      <a routerLink="/" fragment="nosotros">Nosotros</a>
+      <a routerLink="/" fragment="contacto">Contacto</a>
+    </div>
+
+    <p class="copyright">
+      © 2026 BeTimeCo. Todos los derechos reservados.<br />Alexander Gutiérrez -
+      Desarrollo Web MEAN Stack
+    </p>
   </div>
 </footer>

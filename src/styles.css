@@ -920,3 +920,62 @@ form label:not(:first-child) {
     font-size: 2rem;
   }
 }
+
+/* Footer del proyecto original. */
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 25px;
+}
+.footer-brand img {
+  width: 145px;
+  margin-bottom: 8px;
+}
+.footer-brand p {
+  font-size: 0.9rem;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  font-size: 0.85rem;
+}
+.footer-links a {
+  text-decoration: none;
+}
+.copyright {
+  grid-column: 1 / -1;
+  padding-top: 25px;
+  border-top: 1px solid #333;
+  font-size: 0.78rem !important;
+}
+@media (max-width: 720px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.header .nav-links {
+  gap: 20px;
+}
+@media (max-width: 1100px) {
+  .header .nav {
+    flex-wrap: wrap;
+    padding-block: 16px;
+  }
+  .header .menu-toggle {
+    display: block;
+  }
+  .header .nav-links {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 22px;
+    gap: 14px;
+  }
+  .header .nav-links.abierto {
+    display: flex;
+  }
+}
