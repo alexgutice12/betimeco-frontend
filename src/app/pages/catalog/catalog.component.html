@@ -1,113 +1,244 @@
 <section class="hero">
-  <div class="container hero-inner">
-    <div class="hero-copy">
+  <div class="hero-content container">
+    <div class="hero-text">
       <h1>El tiempo también define tu estilo.</h1>
-      <p>
+      <p class="hero-description">
         Relojes modernos para acompañarte en cada momento. Encuentra el diseño
         que mejor representa tu personalidad.
       </p>
-      <a class="button light" href="#coleccion">Ver colección</a>
+      <a class="btn btn-dark" href="#coleccion">Ver colección</a>
     </div>
+
     <div class="hero-image">
-      <div class="hero-circle" aria-hidden="true"></div>
+      <div class="hero-circle"></div>
       <img
         src="/img/reloj-gear-negro.jpg"
         alt="Reloj negro deportivo BeTimeCo"
-        fetchpriority="high"
       />
     </div>
   </div>
 </section>
-<section id="coleccion" class="container section">
-  <div class="section-title">
-    <div>
-      <h2>Nuestra colección</h2>
-      <p>Elige un reloj y conoce sus detalles.</p>
+
+<section class="section collection" id="coleccion">
+  <div class="container">
+    <div class="section-heading">
+      <div><h2>Relojes destacados</h2></div>
+      <p class="section-description">
+        Diseños deportivos, clásicos y urbanos para diferentes momentos del día.
+      </p>
     </div>
-    <div class="filters">
-      <label
-        >Buscar reloj<input
-          type="search"
-          [(ngModel)]="busqueda"
-          placeholder="Nombre del reloj" /></label
-      ><label
-        >Estilo<select [(ngModel)]="categoria">
-          <option value="">Todos los estilos</option>
-          <option *ngFor="let estilo of categorias" [value]="estilo">
-            {{ estilo }}
-          </option>
-        </select></label
-      >
-    </div>
-  </div>
-  <p class="notice" role="status" *ngIf="aviso">{{ aviso }}</p>
-  <p role="status" *ngIf="cargando">Cargando colección…</p>
-  <p role="status" *ngIf="buscandoDetalle">Consultando el detalle…</p>
-  <div class="error-banner" role="alert" *ngIf="error">
-    {{ error }}
-    <button class="text-button" (click)="cargar()">Reintentar</button>
-  </div>
-  <div class="empty" *ngIf="!cargando && !error && filtrados.length === 0">
-    <h3>
-      {{
-        productos.length
-          ? "No encontramos ese reloj"
-          : "La colección está por llegar"
-      }}
-    </h3>
-    <p>
-      {{
-        productos.length
-          ? "Prueba con otro nombre o estilo."
-          : "Los productos publicados aparecerán aquí."
-      }}
-    </p>
-  </div>
-  <div class="product-grid">
-    <article class="product-card" *ngFor="let producto of filtrados">
-      <button
-        class="product-image"
-        (click)="detalle(producto._id)"
-        [attr.aria-label]="'Ver detalle de ' + producto.nombre"
-      >
-        <img [src]="producto.imagen" [alt]="producto.nombre" loading="lazy" />
+    <p class="form-message" role="status" *ngIf="aviso">{{ aviso }}</p>
+    <p role="status" *ngIf="cargando">Cargando relojes…</p>
+    <p class="field-error" role="alert" *ngIf="error">
+      {{ error }}
+      <button type="button" class="text-button" (click)="cargar()">
+        Reintentar
       </button>
-      <div class="product-info">
-        <p class="category">{{ producto.categoria }}</p>
-        <h3>
-          <button class="product-name" (click)="detalle(producto._id)">
-            {{ producto.nombre }}
-          </button>
-        </h3>
-        <div class="price-row">
+    </p>
+    <div class="product-grid">
+      <article class="product-card" *ngFor="let producto of destacados">
+        <button
+          type="button"
+          class="product-image"
+          (click)="detalle(producto._id)"
+          [attr.aria-label]="'Ver detalle de ' + producto.nombre"
+        >
+          <span class="tag" *ngIf="producto.nombre === 'Hexa Black'">Nuevo</span
+          ><span class="tag" *ngIf="producto.nombre === 'Kripton Rose'"
+            >Top</span
+          >
+          <img [src]="producto.imagen" [alt]="producto.nombre" loading="lazy" />
+        </button>
+        <div class="product-info">
+          <p>
+            {{
+              producto.nombre === "Noa Aqua"
+                ? "Casual"
+                : producto.nombre === "Drakon Green"
+                  ? "Sport"
+                  : producto.categoria
+            }}
+          </p>
+          <h3>
+            <button
+              class="product-name"
+              type="button"
+              (click)="detalle(producto._id)"
+            >
+              {{ producto.nombre }}
+            </button>
+          </h3>
           <strong>{{
             producto.precio
               | currency: "COP" : "symbol-narrow" : "1.0-0" : "es-CO"
-          }}</strong
-          ><span>{{
-            producto.stock ? producto.stock + " disponibles" : "Agotado"
-          }}</span>
+          }}</strong>
+          <button
+            class="add-cart"
+            type="button"
+            [disabled]="!producto.stock"
+            (click)="agregar(producto)"
+          >
+            {{ producto.stock ? "Añadir al carrito" : "Agotado" }}
+          </button>
         </div>
-        <button
-          class="button full secondary"
-          [disabled]="producto.stock === 0"
-          (click)="agregar(producto)"
-        >
-          {{ producto.stock ? "Añadir al carrito" : "Agotado" }}
-        </button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section about" id="nosotros">
+  <div class="container about-grid">
+    <div class="about-image">
+      <img src="/img/reloj-kripton-rose.jpg" alt="Reloj elegante BeTimeCo" />
+    </div>
+
+    <div class="about-content">
+      <img
+        class="about-logo"
+        src="/img/logo-betime.svg"
+        alt="Logo principal BeTimeCo"
+      />
+      <h2>Tu tiempo, tu estilo.</h2>
+      <p>
+        BeTimeCo nace como una marca pensada para personas que ven el reloj como
+        algo más que una forma de conocer la hora. Para nosotros, también es una
+        forma de expresar personalidad.
+      </p>
+      <p>
+        Nuestra propuesta reúne relojes deportivos, urbanos y elegantes para
+        acompañarte en diferentes ocasiones.
+      </p>
+      <a class="text-link" href="#contacto">Conoce más sobre nosotros</a>
+    </div>
+  </div>
+</section>
+
+<section class="section styles" id="estilos">
+  <div class="container">
+    <div class="center-heading">
+      <h2>Un reloj para cada estilo</h2>
+    </div>
+
+    <div class="style-grid">
+      <article class="style-card">
+        <h3>Deportivos</h3>
+        <p>Diseños fuertes y cómodos para acompañarte en movimiento.</p>
+      </article>
+
+      <article class="style-card">
+        <h3>Clásicos</h3>
+        <p>Acabados sobrios para quienes prefieren un estilo atemporal.</p>
+      </article>
+
+      <article class="style-card">
+        <h3>Urbanos</h3>
+        <p>Modelos modernos para combinar con un look casual.</p>
+      </article>
+
+      <article class="style-card">
+        <h3>Color</h3>
+        <p>Relojes diferentes para quienes prefieren destacar.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="featured">
+  <div class="container featured-grid">
+    <div class="featured-text">
+      <h2>Haz que cada segundo cuente.</h2>
+      <p>
+        Un diseño diferente para salir de lo tradicional y agregar color a tu
+        día.
+      </p>
+      <a class="btn btn-light" href="#contacto">Quiero conocerlo</a>
+    </div>
+
+    <div class="featured-image">
+      <img
+        src="/img/reloj-skmei-naranja.jpg"
+        alt="Reloj naranja edición color"
+      />
+    </div>
+  </div>
+</section>
+
+<section class="section benefits">
+  <div class="container">
+    <div class="benefits-grid">
+      <article class="benefit">
+        <div class="benefit-icon">01</div>
+        <h3>Envíos nacionales</h3>
+        <p>Recibe tu pedido en las principales ciudades del país.</p>
+      </article>
+      <article class="benefit">
+        <div class="benefit-icon">02</div>
+        <h3>Variedad de estilos</h3>
+        <p>Opciones deportivas, casuales y elegantes en un solo lugar.</p>
+      </article>
+      <article class="benefit">
+        <div class="benefit-icon">03</div>
+        <h3>Atención directa</h3>
+        <p>Te ayudamos a elegir el reloj que mejor se adapte a ti.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contacto">
+  <div class="container contact-grid">
+    <div class="contact-copy">
+      <h2>¿Encontraste tu próximo reloj?</h2>
+      <p>
+        Déjanos tus datos y te ayudamos a conocer disponibilidad, colores y
+        referencias.
+      </p>
+      <div class="contact-data">
+        <p><strong>Correo:</strong> hola@betimeco.com</p>
+        <p><strong>Instagram:</strong> @betimeco</p>
+        <p><strong>Cobertura:</strong> Colombia</p>
       </div>
-    </article>
+    </div>
+
+    <form class="contact-form" id="contactForm" (ngSubmit)="enviarContacto()">
+      <label for="nombre">Nombre</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        [(ngModel)]="contacto.nombre"
+        placeholder="Tu nombre"
+        required
+      />
+
+      <label for="correo">Correo</label>
+      <input
+        type="email"
+        id="correo"
+        name="correo"
+        [(ngModel)]="contacto.correo"
+        placeholder="nombre@correo.com"
+        required
+      />
+
+      <label for="mensaje">Mensaje</label>
+      <textarea
+        id="mensaje"
+        name="mensaje"
+        [(ngModel)]="contacto.mensaje"
+        rows="5"
+        placeholder="¿Qué reloj te interesa?"
+        required
+      ></textarea>
+
+      <button class="btn btn-dark" type="submit">Enviar mensaje</button>
+      <p class="form-message" id="formMessage" aria-live="polite">
+        {{ mensajeContacto }}
+      </p>
+    </form>
   </div>
 </section>
-<section class="about">
-  <div class="container about-inner">
-    <h2>Un reloj para<br />cada momento.</h2>
-    <p>
-      BeTimeCo reúne diseños de distintas formas, materiales y colores. Consulta
-      los detalles, compara estilos y guarda tus favoritos en el carrito.
-    </p>
-  </div>
-</section>
+
 <app-product-detail
   *ngIf="seleccionado as producto"
   [producto]="producto"

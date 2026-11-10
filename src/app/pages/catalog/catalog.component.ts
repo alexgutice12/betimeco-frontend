@@ -18,6 +18,7 @@ import { mensajeError } from "../../utils/errores";
   selector: "app-catalog",
   imports: [CommonModule, FormsModule, ProductDetailComponent],
   templateUrl: "./catalog.component.html",
+  styleUrl: "./catalog.component.css",
 })
 export class CatalogComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
@@ -29,17 +30,27 @@ export class CatalogComponent implements OnInit {
   error = "";
   aviso = "";
   buscandoDetalle = false;
-  busqueda = "";
-  categoria = "";
-  categorias = ["Deportivo", "Clásico", "Urbano", "Elegante"];
-  get filtrados() {
-    return this.productos.filter(
-      (producto) =>
-        (!this.categoria || producto.categoria === this.categoria) &&
-        producto.nombre
-          .toLowerCase()
-          .includes(this.busqueda.trim().toLowerCase()),
-    );
+  contacto = { nombre: "", correo: "", mensaje: "" };
+  mensajeContacto = "";
+  get destacados() {
+    const orden = [
+      "Hexa Black",
+      "Hexa Orange",
+      "Hexa Silver",
+      "Kripton Rose",
+      "Noa Aqua",
+      "Drakon Green",
+    ];
+    return orden.flatMap((nombre) => {
+      const producto = this.productos.find((item) => item.nombre === nombre);
+      return producto ? [producto] : [];
+    });
+  }
+  enviarContacto() {
+    this.mensajeContacto =
+      "Gracias, " +
+      this.contacto.nombre.trim() +
+      ". Este formulario es una demostración; no se ha enviado ningún mensaje.";
   }
   ngOnInit() {
     this.cargar();
