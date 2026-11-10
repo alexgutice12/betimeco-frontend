@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.angular/
+*.log
+node_modules-anterior/
+package-lock.anterior.json
