@@ -1,6 +1,45 @@
-<section class="auth-layout container"><div class="auth-story"><h1>Tu cuenta,<br>tu colección.</h1><p>Ingresa para administrar tus relojes y mantener sus precios y existencias al día.</p><img src="/img/reloj-kripton-rose.jpg" alt="Reloj Kripton Rose con correa café"></div>
-<div class="form-panel"><h2>Iniciar sesión</h2><p>Usa el correo con el que creaste tu cuenta.</p><p class="notice" *ngIf="aviso" role="status">{{ aviso }}</p><p class="error-banner" *ngIf="error" role="alert">{{ error }}</p>
-<form [formGroup]="form" (ngSubmit)="ingresar()" novalidate>
-<label for="login-email">Correo electrónico</label><input id="login-email" type="email" autocomplete="email" formControlName="email" [attr.aria-invalid]="!!errorCampo(form, 'email')" aria-describedby="login-email-error"><small id="login-email-error" class="field-error">{{ errorCampo(form, 'email') }}</small>
-<label for="login-password">Contraseña</label><input id="login-password" type="password" autocomplete="current-password" formControlName="password"><small class="field-error">{{ errorCampo(form, 'password') }}</small>
-<button class="button full" type="submit" [disabled]="cargando">{{ cargando ? 'Ingresando…' : 'Ingresar' }}</button></form><p class="form-bottom">¿Aún no tienes cuenta? <a routerLink="/register">Regístrate</a></p></div></section>
+<section class="auth-layout container">
+  <div class="auth-story">
+    <h1>Tu cuenta,<br />tu colección.</h1>
+    <p>
+      Ingresa para administrar tus relojes y mantener sus precios y existencias
+      al día.
+    </p>
+    <img
+      src="/img/reloj-kripton-rose.jpg"
+      alt="Reloj Kripton Rose con correa café"
+    />
+  </div>
+  <div class="form-panel">
+    <h2>Iniciar sesión</h2>
+    <p>Usa el correo con el que creaste tu cuenta.</p>
+    <p class="notice" *ngIf="aviso" role="status">{{ aviso }}</p>
+    <p class="error-banner" *ngIf="error" role="alert">{{ error }}</p>
+    <form [formGroup]="form" (ngSubmit)="ingresar()" novalidate>
+      <label for="login-email">Correo electrónico</label
+      ><input
+        id="login-email"
+        type="email"
+        autocomplete="email"
+        formControlName="email"
+        [attr.aria-invalid]="!!errorCampo(form, 'email')"
+        aria-describedby="login-email-error"
+      /><small id="login-email-error" class="field-error">{{
+        errorCampo(form, "email")
+      }}</small>
+      <label for="login-password">Contraseña</label
+      ><input
+        id="login-password"
+        type="password"
+        autocomplete="current-password"
+        formControlName="password"
+      /><small class="field-error">{{ errorCampo(form, "password") }}</small>
+      <button class="button full" type="submit" [disabled]="cargando">
+        {{ cargando ? "Ingresando…" : "Ingresar" }}
+      </button>
+    </form>
+    <p class="form-bottom">
+      ¿Aún no tienes cuenta? <a routerLink="/register">Regístrate</a>
+    </p>
+  </div>
+</section>

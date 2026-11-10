@@ -1,7 +1,48 @@
-<section class="auth-layout container"><div class="auth-story"><h1>Empieza con<br>tu propio estilo.</h1><p>Crea una cuenta para añadir productos a BeTimeCo y gestionar tu colección.</p><img src="/img/reloj-hexa-naranja.jpg" alt="Reloj Hexa Orange"></div>
-<div class="form-panel"><h2>Crear cuenta</h2><p>Completa tus datos para registrarte.</p><p class="error-banner" *ngIf="error" role="alert">{{ error }}</p>
-<form [formGroup]="form" (ngSubmit)="registrar()" novalidate>
-<label for="register-name">Nombre</label><input id="register-name" autocomplete="name" formControlName="nombre" maxlength="80"><small class="field-error">{{ errorCampo(form, 'nombre') }}</small>
-<label for="register-email">Correo electrónico</label><input id="register-email" type="email" autocomplete="email" formControlName="email" maxlength="254"><small class="field-error">{{ errorCampo(form, 'email') }}</small>
-<label for="register-password">Contraseña</label><input id="register-password" type="password" autocomplete="new-password" formControlName="password" aria-describedby="password-help"><small id="password-help" class="field-help">Mínimo 8 caracteres: mayúscula, minúscula, número y símbolo. Máximo 72 bytes.</small><small class="field-error">{{ errorCampo(form, 'password') }}</small>
-<button class="button full" type="submit" [disabled]="cargando">{{ cargando ? 'Creando cuenta…' : 'Crear cuenta' }}</button></form><p class="form-bottom">¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p></div></section>
+<section class="auth-layout container">
+  <div class="auth-story">
+    <h1>Empieza con<br />tu propio estilo.</h1>
+    <p>
+      Crea una cuenta para añadir productos a BeTimeCo y gestionar tu colección.
+    </p>
+    <img src="/img/reloj-hexa-naranja.jpg" alt="Reloj Hexa Orange" />
+  </div>
+  <div class="form-panel">
+    <h2>Crear cuenta</h2>
+    <p>Completa tus datos para registrarte.</p>
+    <p class="error-banner" *ngIf="error" role="alert">{{ error }}</p>
+    <form [formGroup]="form" (ngSubmit)="registrar()" novalidate>
+      <label for="register-name">Nombre</label
+      ><input
+        id="register-name"
+        autocomplete="name"
+        formControlName="nombre"
+        maxlength="80"
+      /><small class="field-error">{{ errorCampo(form, "nombre") }}</small>
+      <label for="register-email">Correo electrónico</label
+      ><input
+        id="register-email"
+        type="email"
+        autocomplete="email"
+        formControlName="email"
+        maxlength="254"
+      /><small class="field-error">{{ errorCampo(form, "email") }}</small>
+      <label for="register-password">Contraseña</label
+      ><input
+        id="register-password"
+        type="password"
+        autocomplete="new-password"
+        formControlName="password"
+        aria-describedby="password-help"
+      /><small id="password-help" class="field-help"
+        >Mínimo 8 caracteres: mayúscula, minúscula, número y símbolo. Máximo 72
+        bytes.</small
+      ><small class="field-error">{{ errorCampo(form, "password") }}</small>
+      <button class="button full" type="submit" [disabled]="cargando">
+        {{ cargando ? "Creando cuenta…" : "Crear cuenta" }}
+      </button>
+    </form>
+    <p class="form-bottom">
+      ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a>
+    </p>
+  </div>
+</section>
