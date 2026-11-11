@@ -7,12 +7,14 @@ import {
   OnInit,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, NgForm } from "@angular/forms";
+import { Contacto } from "../../interfaces/contacto";
+import { ContactService } from "../../services/contact.service";
 import { Product } from "../../interfaces/product";
 import { ProductService } from "../../services/product.service";
 import { CartService } from "../../services/cart.service";
 import { ProductDetailComponent } from "../../shared/product-detail/product-detail.component";
-import { mensajeError } from "../../utils/errores";
+import { errorCampo, mensajeError } from "../../utils/errores";
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
   selector: "app-catalog",
@@ -24,14 +26,18 @@ export class CatalogComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   private servicio = inject(ProductService);
   private cart = inject(CartService);
+  private contactoServicio = inject(ContactService);
   productos: Product[] = [];
   seleccionado: Product | null = null;
   cargando = true;
   error = "";
   aviso = "";
   buscandoDetalle = false;
-  contacto = { nombre: "", correo: "", mensaje: "" };
+  contacto: Contacto = { nombre: "", correo: "", mensaje: "" };
   mensajeContacto = "";
+  errorContacto = "";
+  enviandoContacto = false;
+  errorCampo = errorCampo;
   get destacados() {
     const orden = [
       "Hexa Black",
@@ -46,11 +52,29 @@ export class CatalogComponent implements OnInit {
       return producto ? [producto] : [];
     });
   }
-  enviarContacto() {
-    this.mensajeContacto =
-      "Gracias, " +
-      this.contacto.nombre.trim() +
-      ". Este formulario es una demostración; no se ha enviado ningún mensaje.";
+  enviarContacto(formulario: NgForm) {
+    if (this.enviandoContacto) return;
+    this.mensajeContacto = "";
+    this.errorContacto = "";
+    if (formulario.invalid) {
+      formulario.form.markAllAsTouched();
+      return;
+    }
+    this.enviandoContacto = true;
+    this.contactoServicio.enviar(this.contacto)
+      .pipe(finalize(() => {
+        this.enviandoContacto = false;
+        this.cdr.markForCheck();
+      }))
+      .subscribe({
+        next: (respuesta) => {
+          this.mensajeContacto = respuesta.msg;
+          formulario.resetForm({ nombre: "", correo: "", mensaje: "" });
+        },
+        error: (error) => {
+          this.errorContacto = mensajeError(error, formulario.form);
+        },
+      });
   }
   ngOnInit() {
     this.cargar();

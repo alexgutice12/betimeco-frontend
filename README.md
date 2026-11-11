@@ -48,6 +48,7 @@ El proyecto utiliza Angular 22, TypeScript y formularios reactivos.
 4. Mis productos: crear, editar nombre, descripción, precio, stock, categoría e imagen, y eliminar con confirmación.
 5. Carrito: añadir, cambiar cantidades, quitar y calcular total en COP. Al abrirlo, se actualizan los precios y existencias desde la API. No se realizan pagos ni reservas.
 6. Menú y disposición adaptados a móvil.
+7. Formulario de contacto conectado a MongoDB, con validaciones, estado de envío y confirmación después de guardar el mensaje.
 
 La API permite consultar hasta 200 productos. La portada selecciona los seis modelos destacados del diseño original. Cada cuenta administra sólo sus propios productos en «Mis productos».
 

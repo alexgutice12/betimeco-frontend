@@ -200,7 +200,8 @@
       </div>
     </div>
 
-    <form class="contact-form" id="contactForm" (ngSubmit)="enviarContacto()">
+    <form class="contact-form" id="contactForm" #formContacto="ngForm"
+      (ngSubmit)="enviarContacto(formContacto)" novalidate>
       <label for="nombre">Nombre</label>
       <input
         type="text"
@@ -208,8 +209,17 @@
         name="nombre"
         [(ngModel)]="contacto.nombre"
         placeholder="Tu nombre"
+        minlength="3"
+        maxlength="80"
+        autocomplete="name"
+        [readonly]="enviandoContacto"
+        #nombreContacto="ngModel"
+        aria-describedby="nombre-contacto-error"
         required
       />
+      <small id="nombre-contacto-error" class="field-error" *ngIf="nombreContacto.touched && nombreContacto.invalid">
+        {{ errorCampo(formContacto.form, 'nombre') }}
+      </small>
 
       <label for="correo">Correo</label>
       <input
@@ -218,8 +228,17 @@
         name="correo"
         [(ngModel)]="contacto.correo"
         placeholder="nombre@correo.com"
+        email
+        maxlength="254"
+        autocomplete="email"
+        [readonly]="enviandoContacto"
+        #correoContacto="ngModel"
+        aria-describedby="correo-contacto-error"
         required
       />
+      <small id="correo-contacto-error" class="field-error" *ngIf="correoContacto.touched && correoContacto.invalid">
+        {{ errorCampo(formContacto.form, 'correo') }}
+      </small>
 
       <label for="mensaje">Mensaje</label>
       <textarea
@@ -228,10 +247,21 @@
         [(ngModel)]="contacto.mensaje"
         rows="5"
         placeholder="¿Qué reloj te interesa?"
+        minlength="10"
+        maxlength="2000"
+        [readonly]="enviandoContacto"
+        #textoContacto="ngModel"
+        aria-describedby="mensaje-contacto-error"
         required
       ></textarea>
+      <small id="mensaje-contacto-error" class="field-error" *ngIf="textoContacto.touched && textoContacto.invalid">
+        {{ errorCampo(formContacto.form, 'mensaje') }}
+      </small>
 
-      <button class="btn btn-dark" type="submit">Enviar mensaje</button>
+      <button class="btn btn-dark" type="submit" [disabled]="enviandoContacto">
+        {{ enviandoContacto ? 'Enviando…' : 'Enviar mensaje' }}
+      </button>
+      <p class="field-error" role="alert" *ngIf="errorContacto">{{ errorContacto }}</p>
       <p class="form-message" id="formMessage" aria-live="polite">
         {{ mensajeContacto }}
       </p>
